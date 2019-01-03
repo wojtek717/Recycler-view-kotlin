@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.video_row.view.*
 
-class MainAdapter : RecyclerView.Adapter<CustomVievHolder>(){
+class MainAdapter(val homeFeed: HomeFeed) : RecyclerView.Adapter<CustomVievHolder>(){
 
-    val videoTitles = listOf<String>("First", "Second", "Third", "One more!", "AND ONE MORE MORE!")
 
     override fun getItemCount(): Int {
-        return videoTitles.size
+        return homeFeed.videos.count()
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomVievHolder {
@@ -22,9 +21,11 @@ class MainAdapter : RecyclerView.Adapter<CustomVievHolder>(){
     }
 
     override fun onBindViewHolder(p0: CustomVievHolder, p1: Int) {
-        val videoTitle = videoTitles.get(p1)
+//        val videoTitle = videoTitles.get(p1)
+        val video = homeFeed.videos.get(p1)
 
-        p0.view.textView_video_title.text = videoTitle
+        p0.view.textView_video_title.text = video.name
+        p0.view.textView_video_authorname.text = video.channel.name
     }
 }
 
